@@ -11,29 +11,31 @@
 <body>
   <header>
     <!--View high scores link, upper left corner. Get info from local storage-->
-    <p>View High Scores</p>
+    <div>View High Scores</div>
 
     <!--Timer, upper right corner-->
     <div id="timer">Time:</div>
 
   </header>
-
-  <main>
-    <div>
+  
+  <main class="quiz-card">
+    <div id="upper">
       <!--Coding Quiz headline/Questions-->
+      <h1 class="intro">Coding Quiz</h1>
     </div>
 
-    <div>
+    <div id="middle">
       <!--Instructions/Answer options-->
+      <p id="intro-text">Try to answer the following questions within the time limit.<br> Keep in mind that incorrect answers will subtract 10 seconds off your time.<br> Your score equals the time remaining after all questions are answered.</p>
     </div>
 
-    <div>
+    <div class="lower">
       <!--Start button/ Correct/Incorrect statement-->
       <button id="start-button" class="btn">Start Quiz</button>
     </div>
 
   </main>
-  
+
 
   <script src="./assets/js/script.js"></script>
 </body>

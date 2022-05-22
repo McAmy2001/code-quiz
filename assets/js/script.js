@@ -1,25 +1,29 @@
 const startBtn = document.querySelector("#start-button");
 var timerEl = document.getElementById("timer");
 var time = 75;
+var h1El = document.querySelector("h1");
+var introTextEl = document.getElementById("intro-text");
 
-setInterval(timerRun, 1000);
-
+//Timer functions
 function stopTimer() {
   clearInterval(timerRun);
 };
+
 function timerRun() {
   if(time > 0) {
 
     timerEl.textContent = "Time: " + time;
     time--;
   }
+  //else if all questions are answered, stop timer keep current time displayed
   else {
     stopTimer();
     timerEl.textContent = "Time: 0";
   }
-  
 };
-timerRun();
+function loseTime () {
+  time -= 10;
+};
 
 
 const questionArray = [
@@ -113,17 +117,19 @@ const questionArray = [
       {text: "%", correct:false}
     ]
   }
-]
+];
 
-//setInterval(startTimer, 1000);
-//let startTimer = function() {
-  //timerEl.textContent = "Time:" + time;
-//}
+function quizQuestions() {
+  h1El.classList.add("hide");
+  introTextEl.classList.add("hide");
+};
 
 function startQuiz() {
   console.log("start");
   startBtn.classList.add("hide");
-  //startTimer();
-}
+  setInterval(timerRun, 1000);
+  timerRun();
+  //quizQuestions();
+};
 
 startBtn.addEventListener("click", startQuiz);
