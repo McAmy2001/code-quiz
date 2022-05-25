@@ -11,6 +11,10 @@ var option2BtnEl = document.getElementById("option2-btn");
 var option3BtnEl = document.getElementById("option3-btn");
 var option4BtnEl = document.getElementById("option4-btn");
 
+document.createElement("p");
+var lowerPEl = document.createElement("p");
+lowerPEl.className = "correct-incorrect";
+
 
 //Timer functions
 function stopTimer() {
@@ -23,7 +27,10 @@ function timerRun() {
     timerEl.textContent = "Time: " + time;
     time--;
   }
+
   //else if all questions are answered, stop timer keep current time displayed
+
+  //if time = 0, stop and keep time at 0
   else {
     stopTimer();
     timerEl.textContent = "Time: 0";
@@ -134,16 +141,18 @@ function selectedAnswer(e) {
   console.log(answer.correct);
   var answer = answer.correct;
 
-  if (answer = true) {
-    //nextQuestion();
+  if (answer === true) {
     console.log("test");
+    lowerPEl.textContent = "Correct!";
     //return(true);
-  }
-  else if (answer = false) {
-    //loseTime();
     //nextQuestion();
+  }
+  else if (answer === false) {
+    loseTime();
     console.log("loser test");
-    //return(false);
+    lowerPEl.textContent = "Incorrect!";
+    //return(false)
+    //nextQuestion();
   }
 
 };
@@ -156,8 +165,8 @@ function selectedAnswer(e) {
   //Loop through question array
 
   function quizQuestions() {
-    for (var i = 0; i < questionArray.length; i++) {
-      nextQuestion();
+    for (var i = 0; i < questionArray.length;) {
+      nextQuestion(i);
 
     function nextQuestion() {
 
@@ -177,6 +186,7 @@ function selectedAnswer(e) {
 
       introAnswersEl.addEventListener("click", selectedAnswer);
       }
+      i += 1;
     }
   }; 
   
@@ -185,6 +195,7 @@ function selectedAnswer(e) {
 function startQuiz() {
   console.log("start");
   startBtn.classList.add("hide");
+  lowerEl.appendChild(lowerPEl);
   setInterval(timerRun, 1000);
   timerRun();
   option1BtnEl.className = "answer-btns";
