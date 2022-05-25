@@ -43,25 +43,25 @@ const questionArray = [
       {text: "<script>", correct:true},
       {text: "<link>", correct:false},
       {text: "<javascript>", correct:false},
-      {text: "<a>", correct:false}
+      {text: "<join>", correct:false}
     ]
   },
   {
     question: "Javascript statements end with which puncuation mark?",
     answers: [
-      {text: ":", correct:false},
-      {text: ";", correct:true},
-      {text: ".", correct:false},
-      {text: "!", correct:false}
+      {text: "  :  ", correct:false},
+      {text: "  ;  ", correct:true},
+      {text: "  .  ", correct:false},
+      {text: "  !  ", correct:false}
     ]
   },
   {
     question: "Javascript comments start with:",
     answers: [
-      {text: "<!", correct:false},
-      {text: "{", correct: false},
-      {text: "/*", correct:false},
-      {text: "//", correct:true}
+      {text: "  <!  ", correct:false},
+      {text: "  {  ", correct: false},
+      {text: "  **  ", correct:false},
+      {text: "  //  ", correct:true}
     ]
   },
   {
@@ -76,19 +76,19 @@ const questionArray = [
   {
     question: "Which symbols enclose an object?",
     answers: [
-      {text: "{}", correct:true},
-      {text: "//", correct:false},
-      {text: "[]", correct:false},
-      {text: "()", correct:false}
+      {text: " {} ", correct:true},
+      {text: " // ", correct:false},
+      {text: " [] ", correct:false},
+      {text: " () ", correct:false}
     ]
   },
   {
     question: "Which symbols enclose an array?",
     answers: [
-      {text: "{}", correct:false},
-      {text: "//", correct:false},
-      {text: "[]", correct:true},
-      {text: "()", correct:false}
+      {text: " {} ", correct:false},
+      {text: " // ", correct:false},
+      {text: " [] ", correct:true},
+      {text: " () ", correct:false}
     ]
   },
   {
@@ -130,42 +130,68 @@ const questionArray = [
 ];
 
 function selectedAnswer(e) {
-  let answer = e.target;
-  console.log(answer);
+  var answer = e.target;
+  console.log(answer.correct);
+  var answer = answer.correct;
 
-  if (answer.dataset.correct = "false") {
-    loseTime();
+  if (answer = true) {
+    //nextQuestion();
+    console.log("test");
+    //return(true);
   }
+  else if (answer = false) {
+    //loseTime();
+    //nextQuestion();
+    console.log("loser test");
+    //return(false);
+  }
+
 };
 
-function quizQuestions() {
+
   //Remove intro heading and paragraph
   //h1El.remove();
   //introAnswersEl.remove();
 
-  //Make optionEls into buttons
-
   //Loop through question array
-  for (let i = 0; i < questionArray.length; i++) {
-    h1El.textContent = questionArray[i].question;
-    option1BtnEl.textContent = questionArray[i].answers[0].text;
-    option2BtnEl.textContent = questionArray[i].answers[1].text;
-    option3BtnEl.textContent = questionArray[i].answers[2].text;
-    option4BtnEl.textContent = questionArray[i].answers[3].text;
 
-    introAnswersEl.addEventListener("click", selectedAnswer);
-    
-  };
+  function quizQuestions() {
+    for (var i = 0; i < questionArray.length; i++) {
+      nextQuestion();
 
+    function nextQuestion() {
 
-};
+      h1El.textContent = questionArray[i].question;
+
+      option1BtnEl.textContent = questionArray[i].answers[0].text;
+      option1BtnEl.correct = questionArray[i].answers[0].correct;
+
+      option2BtnEl.textContent = questionArray[i].answers[1].text;
+      option2BtnEl.correct = questionArray[i].answers[1].correct;
+
+      option3BtnEl.textContent = questionArray[i].answers[2].text;
+      option3BtnEl.correct = questionArray[i].answers[2].correct;
+
+      option4BtnEl.textContent = questionArray[i].answers[3].text;
+      option4BtnEl.correct = questionArray[i].answers[3].correct;
+
+      introAnswersEl.addEventListener("click", selectedAnswer);
+      }
+    }
+  }; 
+  
+
 
 function startQuiz() {
   console.log("start");
   startBtn.classList.add("hide");
   setInterval(timerRun, 1000);
   timerRun();
-  quizQuestions();
+  option1BtnEl.className = "answer-btns";
+  option2BtnEl.className = "answer-btns";
+  option3BtnEl.className = "answer-btns";
+  option4BtnEl.className = "answer-btns";
+  quizQuestions(questionArray);
 };
 
 startBtn.addEventListener("click", startQuiz);
