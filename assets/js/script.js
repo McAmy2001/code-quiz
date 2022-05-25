@@ -2,7 +2,15 @@ const startBtn = document.querySelector("#start-button");
 var timerEl = document.getElementById("timer");
 var time = 75;
 var h1El = document.querySelector("h1");
-var introTextEl = document.getElementById("intro-text");
+var introAnswersEl = document.getElementById("intro-answers");
+var upperEl = document.getElementById("upper");
+var middleEl = document.getElementById("middle");
+var lowerEl = document.getElementById("lower");
+var option1BtnEl = document.getElementById("option1-btn");
+var option2BtnEl = document.getElementById("option2-btn");
+var option3BtnEl = document.getElementById("option3-btn");
+var option4BtnEl = document.getElementById("option4-btn");
+
 
 //Timer functions
 function stopTimer() {
@@ -21,11 +29,13 @@ function timerRun() {
     timerEl.textContent = "Time: 0";
   }
 };
+
 function loseTime () {
   time -= 10;
 };
 
 
+//Question & answer array
 const questionArray = [
   {
     question: "Which tag links Javascript to an HTML file?",
@@ -100,8 +110,8 @@ const questionArray = [
     ]
   },
   {
-    question: "The Javascript arithmetic operator '*' means:",
-    answer: [
+   question: "The Javascript arithmetic operator * means:",
+    answers: [
       {text: "Addition", correct:false},
       {text: "Subtraction", correct:false},
       {text: "Multiplication", correct:true},
@@ -110,18 +120,44 @@ const questionArray = [
   },
   {
     question: "In Javascript which symbol assigns meaning to a variable?",
-    answer: [
-      {text: "=", correct:true},
-      {text: "==", correct:false},
-      {text: "===", correct:false},
-      {text: "%", correct:false}
+    answers: [
+      {text: "  =  ", correct:true},
+      {text: "  ==  ", correct:false},
+      {text: "  ===  ", correct:false},
+      {text: "  %  ", correct:false}
     ]
   }
 ];
 
+function selectedAnswer(e) {
+  let answer = e.target;
+  console.log(answer);
+
+  if (answer.dataset.correct = "false") {
+    loseTime();
+  }
+};
+
 function quizQuestions() {
-  h1El.classList.add("hide");
-  introTextEl.classList.add("hide");
+  //Remove intro heading and paragraph
+  //h1El.remove();
+  //introAnswersEl.remove();
+
+  //Make optionEls into buttons
+
+  //Loop through question array
+  for (let i = 0; i < questionArray.length; i++) {
+    h1El.textContent = questionArray[i].question;
+    option1BtnEl.textContent = questionArray[i].answers[0].text;
+    option2BtnEl.textContent = questionArray[i].answers[1].text;
+    option3BtnEl.textContent = questionArray[i].answers[2].text;
+    option4BtnEl.textContent = questionArray[i].answers[3].text;
+
+    introAnswersEl.addEventListener("click", selectedAnswer);
+    
+  };
+
+
 };
 
 function startQuiz() {
@@ -129,7 +165,7 @@ function startQuiz() {
   startBtn.classList.add("hide");
   setInterval(timerRun, 1000);
   timerRun();
-  //quizQuestions();
+  quizQuestions();
 };
 
 startBtn.addEventListener("click", startQuiz);
