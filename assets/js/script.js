@@ -136,15 +136,6 @@ const questionArray = [
   }
 ];
 
-function clearQuiz() {
-  lowerPEl.textContent = "";
-  h1El.textContent = "";
-  option1BtnEl.textContent = "";
-  option2BtnEl.textContent = "";
-  option3BtnEl.textContent = "";
-  option4BtnEl.textContent = "";  
-};
-
 function selectedAnswer(e) {
   var answer = e.target;
   console.log(answer.correct);
@@ -153,7 +144,6 @@ function selectedAnswer(e) {
   if (answer === true) {
     console.log("test");
     lowerPEl.textContent = "Correct!";
-    setTimeout(eraseLowerPEl, 1000);
     //return(true);
     //nextQuestion();
   }
@@ -161,28 +151,27 @@ function selectedAnswer(e) {
     loseTime();
     console.log("loser test");
     lowerPEl.textContent = "Incorrect!";
-    setTimeout(eraseLowerPEl, 1000);
     //return(false)
     //nextQuestion();
   }
 
 };
 
-function quizQuestions() {
-  for (var i = 0; i < questionArray.length; i++) {
-    displayQuestion(i);
-    displayAnswers(i);
-    answerListen();
-    setTimeout(clearQuiz);
-  }
 
-    function displayQuestion() {
-      //Question i from array
+  //Remove intro heading and paragraph
+  //h1El.remove();
+  //introAnswersEl.remove();
+
+  //Loop through question array
+
+  function quizQuestions() {
+    for (var i = 0; i < questionArray.length;) {
+      nextQuestion(i);
+
+    function nextQuestion() {
+
       h1El.textContent = questionArray[i].question;
-    };
 
-    function displayAnswers() {
-      //Answer options for question i
       option1BtnEl.textContent = questionArray[i].answers[0].text;
       option1BtnEl.correct = questionArray[i].answers[0].correct;
 
@@ -194,18 +183,13 @@ function quizQuestions() {
 
       option4BtnEl.textContent = questionArray[i].answers[3].text;
       option4BtnEl.correct = questionArray[i].answers[3].correct;
-    };
 
-    function answerListen() {
-      //Event listener for answers
       introAnswersEl.addEventListener("click", selectedAnswer);
-    };
-      
+      }
+      i += 1;
+    }
+  }; 
   
-  //Loop through question array
-
-
-};
 
 
 function startQuiz() {
