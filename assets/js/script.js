@@ -7,6 +7,7 @@ var introAnswersEl = document.getElementById("intro-answers");
 var upperEl = document.getElementById("upper");
 var middleEl = document.getElementById("middle");
 var lowerEl = document.getElementById("lower");
+var lowerLowerEl = document.getElementById("lower-lower");
 var option1BtnEl = document.getElementById("option1-btn");
 var option2BtnEl = document.getElementById("option2-btn");
 var option3BtnEl = document.getElementById("option3-btn");
@@ -19,7 +20,8 @@ lowerPEl.className = "correct-incorrect";
 introAnswersEl.addEventListener("click", selectedAnswer);
 
 var submitBtnEl = document.getElementById("submit-btn");
-submitBtnEl.addEventListener("submit", highScores);
+
+
 
 var currentQuestionIndex = 0;
 
@@ -144,9 +146,36 @@ const questionArray = [
   }
 ];
 
-var highScores = function(event) {
+function highScoreCard() {
+  console.log("high scores");
+  var scoreListEl = document.createElement("ol");
+  middleEl.appendChild(scoreListEl);
+  scoreListEl.className = "hs-list";
+  
+  var hsListEl1 = document.createElement("li");
+  hsListEl1.className = "hs-list-item";
+  middleEl.appendChild(hsListEl1);
+  hsListEl1.className = "hs-list-item";
+  hsListEl1.textContent = document.querySelector("input[name='initials']").value + ", " + time;
+  var hsListEl2 = document.createElement("li");
+  middleEl.appendChild(hsListEl2);
+  hsListEl2.className = "hs-list-item";
+  var hsListEl3 = document.createElement("li");
+  middleEl.appendChild(hsListEl3);
+  hsListEl3.className = "hs-list-item";
+};
+
+
+function highScores(event, inputText) {
   event.preventDefault();
-  console.log("score");
+  var initialInput = document.querySelector("input[name='initials']").value;
+  console.log(initialInput + ", " + time);
+  localStorage.setItem(initialInput, time);
+  upperEl.className = "hide";
+  lowerEl.className = "hide";
+  lowerLowerEl.className = "hide";
+  highScoreCard();
+  
 };
 
 function saveScore() {
@@ -226,3 +255,4 @@ function startQuiz() {
 
 
 startBtn.addEventListener("click", startQuiz);
+submitBtnEl.addEventListener("click", highScores);

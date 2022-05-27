@@ -100,3 +100,11 @@ header {
     padding: 2px 7px;
     border-radius: 5px;
  }
+
+ .hs-list-item {
+  background-color: #e6e6ff;
+  height: 26px;
+  margin: 10px 0;
+  width: 100%
+ }
+
