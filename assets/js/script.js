@@ -1,6 +1,7 @@
 const startBtn = document.querySelector("#start-button");
 var timerEl = document.getElementById("timer");
 var time = 75;
+
 var h1El = document.querySelector("h1");
 var introAnswersEl = document.getElementById("intro-answers");
 var upperEl = document.getElementById("upper");
@@ -15,32 +16,39 @@ document.createElement("p");
 var lowerPEl = document.createElement("p");
 lowerPEl.className = "correct-incorrect";
 
+introAnswersEl.addEventListener("click", selectedAnswer);
+
+var submitBtnEl = document.getElementById("submit-btn");
+submitBtnEl.addEventListener("submit", highScores);
+
+var currentQuestionIndex = 0;
 
 //Timer functions
-function stopTimer() {
-  clearInterval(timerRun);
+
+function timeBegin() {
+  const runTime = setInterval(timerRun, 1000);
+  function timerRun() {
+      timerEl.textContent = "Time: " + time;
+      time--;
+    
+    if (currentQuestionIndex === questionArray.length) {
+      clearInterval(runTime);
+      timerEl.textContent = "Time: " + time;
+      return time;
+    }
+    else if (time === 0) {
+      clearInterval(runTime);
+      timerEl.textContent = "Time: " + time;
+      endQuiz();
+      return time;
+    }
+  }
 };
 
-function timerRun() {
-  if(time > 0) {
-
-    timerEl.textContent = "Time: " + time;
-    time--;
-  }
-
-  //else if all questions are answered, stop timer keep current time displayed
-
-  //if time = 0, stop and keep time at 0
-  else {
-    stopTimer();
-    timerEl.textContent = "Time: 0";
-  }
-};
-
+//Subtract 10 seconds from time for wrong answers
 function loseTime () {
   time -= 10;
 };
-
 
 //Question & answer array
 const questionArray = [
@@ -83,19 +91,19 @@ const questionArray = [
   {
     question: "Which symbols enclose an object?",
     answers: [
-      {text: " {} ", correct:true},
+      {text: " { } ", correct:true},
       {text: " // ", correct:false},
-      {text: " [] ", correct:false},
-      {text: " () ", correct:false}
+      {text: " [ ] ", correct:false},
+      {text: " ( ) ", correct:false}
     ]
   },
   {
     question: "Which symbols enclose an array?",
     answers: [
-      {text: " {} ", correct:false},
+      {text: " { } ", correct:false},
       {text: " // ", correct:false},
-      {text: " [] ", correct:true},
-      {text: " () ", correct:false}
+      {text: " [ ] ", correct:true},
+      {text: " ( ) ", correct:false}
     ]
   },
   {
@@ -104,7 +112,7 @@ const questionArray = [
       {text: "between 1 & 10", correct:false},
       {text: "that is >=0 and <1", correct:true},
       {text: "between -100 and 100", correct:false},
-      {text: "that is >=0 and <=1"}
+      {text: "that is >=0 and <=1", correct:false}
     ]
   },
   {
@@ -136,73 +144,85 @@ const questionArray = [
   }
 ];
 
+var highScores = function(event) {
+  event.preventDefault();
+  console.log("score");
+};
+
+function saveScore() {
+  var inputFormEl = document.getElementById("lower-lower");
+  inputFormEl.className = "input-form";
+
+  };
+
+function setScore() {
+  introAnswersEl.className = "hide";
+  timerEl.className = "hide";
+  h1El.textContent = "All done! Your final score is " + time + ".";
+  saveScore();
+};
+
+function endQuiz() {
+  setTimeout(setScore, 1000);
+};
+
+function eraseLowerPEl() {
+  lowerPEl.textContent = "";
+};
+
 function selectedAnswer(e) {
   var answer = e.target;
-  console.log(answer.correct);
   var answer = answer.correct;
 
   if (answer === true) {
-    console.log("test");
     lowerPEl.textContent = "Correct!";
-    //return(true);
-    //nextQuestion();
+    setTimeout(eraseLowerPEl, 500);
+    
   }
   else if (answer === false) {
     loseTime();
-    console.log("loser test");
     lowerPEl.textContent = "Incorrect!";
-    //return(false)
-    //nextQuestion();
+    setTimeout(eraseLowerPEl, 500); 
   }
 
+  currentQuestionIndex++;
+
+  if (currentQuestionIndex === questionArray.length) {
+    endQuiz();
+  }
+  else {
+  quizQuestions(currentQuestionIndex);
+  }
 };
 
+function quizQuestions(questionIndex) {
+    //display question
+      h1El.textContent = questionArray[questionIndex].question;
+    //display answers
+      option1BtnEl.textContent = questionArray[questionIndex].answers[0].text;
+      option1BtnEl.correct = questionArray[questionIndex].answers[0].correct;
 
-  //Remove intro heading and paragraph
-  //h1El.remove();
-  //introAnswersEl.remove();
+      option2BtnEl.textContent = questionArray[questionIndex].answers[1].text;
+      option2BtnEl.correct = questionArray[questionIndex].answers[1].correct;
 
-  //Loop through question array
+      option3BtnEl.textContent = questionArray[questionIndex].answers[2].text;
+      option3BtnEl.correct = questionArray[questionIndex].answers[2].correct;
 
-  function quizQuestions() {
-    for (var i = 0; i < questionArray.length;) {
-      nextQuestion(i);
-
-    function nextQuestion() {
-
-      h1El.textContent = questionArray[i].question;
-
-      option1BtnEl.textContent = questionArray[i].answers[0].text;
-      option1BtnEl.correct = questionArray[i].answers[0].correct;
-
-      option2BtnEl.textContent = questionArray[i].answers[1].text;
-      option2BtnEl.correct = questionArray[i].answers[1].correct;
-
-      option3BtnEl.textContent = questionArray[i].answers[2].text;
-      option3BtnEl.correct = questionArray[i].answers[2].correct;
-
-      option4BtnEl.textContent = questionArray[i].answers[3].text;
-      option4BtnEl.correct = questionArray[i].answers[3].correct;
-
-      introAnswersEl.addEventListener("click", selectedAnswer);
-      }
-      i += 1;
-    }
-  }; 
+      option4BtnEl.textContent = questionArray[questionIndex].answers[3].text;
+      option4BtnEl.correct = questionArray[questionIndex].answers[3].correct;
+};
   
-
-
 function startQuiz() {
   console.log("start");
   startBtn.classList.add("hide");
   lowerEl.appendChild(lowerPEl);
-  setInterval(timerRun, 1000);
-  timerRun();
+  timeBegin();
   option1BtnEl.className = "answer-btns";
   option2BtnEl.className = "answer-btns";
   option3BtnEl.className = "answer-btns";
   option4BtnEl.className = "answer-btns";
-  quizQuestions(questionArray);
+  quizQuestions(currentQuestionIndex);
 };
+
 
 startBtn.addEventListener("click", startQuiz);

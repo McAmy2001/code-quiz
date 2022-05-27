@@ -56,6 +56,7 @@ header {
   color: #ffffff;
   background-color: #00004d;
   font-size: 20px;
+  border-radius: 5px;
 }
 
 .answer-btns {
@@ -76,3 +77,26 @@ header {
    font-size: 22px;
  }
 
+ .input-form {
+   width: 50%;
+   background-color: #e6e6ff;
+   margin: 0 auto;
+
+ }
+ .input-form input {
+   background-color: #ffffff;
+   height: 26px;
+   margin: 10px 0;
+ }
+
+ .input-form label {
+   font-size: 22px;
+ }
+
+ #submit-btn {
+    font-size: 20px;
+    background-color: #00004d;
+    color: #e6e6ff;
+    padding: 2px 7px;
+    border-radius: 5px;
+ }
