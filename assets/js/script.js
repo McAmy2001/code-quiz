@@ -12,6 +12,7 @@ var option1BtnEl = document.getElementById("option1-btn");
 var option2BtnEl = document.getElementById("option2-btn");
 var option3BtnEl = document.getElementById("option3-btn");
 var option4BtnEl = document.getElementById("option4-btn");
+var hsListDivEl = document.getElementById("hs-list");
 
 document.createElement("p");
 var lowerPEl = document.createElement("p");
@@ -72,69 +73,69 @@ const questionArray = [
       {text: "  !  ", correct:false}
     ]
   },
-  {
-    question: "Javascript comments start with:",
-    answers: [
-      {text: "  <!  ", correct:false},
-      {text: "  {  ", correct: false},
-      {text: "  **  ", correct:false},
-      {text: "  //  ", correct:true}
-    ]
-  },
-  {
-    question: "Which does not declare a Javascript variable?",
-    answers: [
-      {text: "var", correct:false},
-      {text: "let", correct:false},
-      {text: "make", correct:true},
-      {text: "const", correct:false}
-    ]
-  },
-  {
-    question: "Which symbols enclose an object?",
-    answers: [
-      {text: " { } ", correct:true},
-      {text: " // ", correct:false},
-      {text: " [ ] ", correct:false},
-      {text: " ( ) ", correct:false}
-    ]
-  },
-  {
-    question: "Which symbols enclose an array?",
-    answers: [
-      {text: " { } ", correct:false},
-      {text: " // ", correct:false},
-      {text: " [ ] ", correct:true},
-      {text: " ( ) ", correct:false}
-    ]
-  },
-  {
-    question: "Math.random(); will return a number:",
-    answers: [
-      {text: "between 1 & 10", correct:false},
-      {text: "that is >=0 and <1", correct:true},
-      {text: "between -100 and 100", correct:false},
-      {text: "that is >=0 and <=1", correct:false}
-    ]
-  },
-  {
-    question: "Arrays in Javascript can be used to store:",
-    answers: [
-      {text: "Numbers and strings", correct:false},
-      {text: "Other arrays", correct:false},
-      {text: "Booleans", correct:false},
-      {text: "All of the above", correct:true}
-    ]
-  },
-  {
-   question: "The Javascript arithmetic operator * means:",
-    answers: [
-      {text: "Addition", correct:false},
-      {text: "Subtraction", correct:false},
-      {text: "Multiplication", correct:true},
-      {text: "Division", correct:false}
-    ]
-  },
+  //{
+  //  question: "Javascript comments start with:",
+  //  answers: [
+  //    {text: "  <!  ", correct:false},
+  //    {text: "  {  ", correct: false},
+  //    {text: "  **  ", correct:false},
+  //    {text: "  //  ", correct:true}
+  //  ]
+  //},
+  //{
+  //  question: "Which does not declare a Javascript variable?",
+  //  answers: [
+  //    {text: "var", correct:false},
+  //    {text: "let", correct:false},
+  //    {text: "make", correct:true},
+  //    {text: "const", correct:false}
+  //  ]
+  //},
+  //{
+  //  question: "Which symbols enclose an object?",
+  //  answers: [
+  //    {text: " { } ", correct:true},
+  //    {text: " // ", correct:false},
+  //    {text: " [ ] ", correct:false},
+  //    {text: " ( ) ", correct:false}
+  //  ]
+  //}, 
+  //{
+  //  question: "Math.random(); will return a number:",
+  //  answers: [
+  //    {text: "between 1 & 10", correct:false},
+  //    {text: "that is >=0 and <1", correct:true},
+  //    {text: "between -100 and 100", correct:false},
+  //    {text: "that is >=0 and <=1", correct:false}
+  //  ]
+  //},
+  //{
+  //  question: "Arrays in Javascript can be used to store:",
+  //  answers: [
+  //    {text: "Numbers and strings", correct:false},
+  //    {text: "Other arrays", correct:false},
+  //    {text: "Booleans", correct:false},
+  //    {text: "All of the above", correct:true}
+  //  ]
+  //},
+  //{
+  //question: "Which symbols enclose an array?",
+  //  answers: [
+  //    {text: " { } ", correct:false},
+  //    {text: " // ", correct:false},
+  //    {text: " [ ] ", correct:true},
+  //    {text: " ( ) ", correct:false}
+  //  ]
+  //},
+  //{
+  // question: "The Javascript arithmetic operator * means:",
+  //  answers: [
+  //    {text: "Addition", correct:false},
+  //    {text: "Subtraction", correct:false},
+  //    {text: "Multiplication", correct:true},
+  //    {text: "Division", correct:false}
+  //  ]
+  //},
   {
     question: "In Javascript which symbol assigns meaning to a variable?",
     answers: [
@@ -149,19 +150,19 @@ const questionArray = [
 function highScoreCard() {
   console.log("high scores");
   var scoreListEl = document.createElement("ol");
-  middleEl.appendChild(scoreListEl);
+  hsListDivEl.appendChild(scoreListEl);
   scoreListEl.className = "hs-list";
   
   var hsListEl1 = document.createElement("li");
   hsListEl1.className = "hs-list-item";
-  middleEl.appendChild(hsListEl1);
+  hsListDivEl.appendChild(hsListEl1);
   hsListEl1.className = "hs-list-item";
   hsListEl1.textContent = document.querySelector("input[name='initials']").value + ", " + time;
   var hsListEl2 = document.createElement("li");
-  middleEl.appendChild(hsListEl2);
+  hsListDivEl.appendChild(hsListEl2);
   hsListEl2.className = "hs-list-item";
   var hsListEl3 = document.createElement("li");
-  middleEl.appendChild(hsListEl3);
+  hsListDivEl.appendChild(hsListEl3);
   hsListEl3.className = "hs-list-item";
 };
 
@@ -171,8 +172,8 @@ function highScores(event, inputText) {
   var initialInput = document.querySelector("input[name='initials']").value;
   console.log(initialInput + ", " + time);
   localStorage.setItem(initialInput, time);
-  upperEl.className = "hide";
-  lowerEl.className = "hide";
+  //upperEl.className = "hide";
+  //lowerEl.className = "hide";
   lowerLowerEl.className = "hide";
   highScoreCard();
   
