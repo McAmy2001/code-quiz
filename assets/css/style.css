@@ -14,10 +14,7 @@ header {
   font-size: 20px;
   margin: 20px 20px 20px 50px;
 }
- header div a {
-   text-decoration: none;
-   color: #00004d;
- }
+
 .hide {
   display: none;
 }
@@ -48,15 +45,6 @@ header {
   font-size: 20px;
   border: none;
   background-color: #e6e6ff;
-
-
-}
-#start-button {
-  padding: 10px 20px;
-  color: #ffffff;
-  background-color: #00004d;
-  font-size: 20px;
-  border-radius: 5px;
 }
 
 .answer-btns {
@@ -93,7 +81,7 @@ header {
    font-size: 22px;
  }
 
- #submit-btn {
+ .btn, #submit-btn, #view-hs, #play-again {
     font-size: 20px;
     background-color: #00004d;
     color: #e6e6ff;
@@ -107,4 +95,5 @@ header {
   margin: 10px 0;
   width: 100%
  }
+
 

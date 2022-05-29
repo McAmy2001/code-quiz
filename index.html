@@ -12,7 +12,11 @@
   <header>
     <!--View high scores link, upper left corner. Get info from local storage-->
     <div id="hs-list">
-
+        <!--<button id="view-hs">View High Scores</p>-->
+        <h3 id="hs-title" class="hide">High Scores:</h3>
+        <div class="hs-style">
+           <ol id="high-scores"></ol>
+        </div>
     </div>
 
     <!--Timer, upper right corner-->
@@ -47,6 +51,7 @@
     <div id="lower">
       <!--Start button/ Correct/Incorrect statement-->
       <button id="start-button" class="btn">Start Quiz</button>
+      <button id="play-again" class="hide" onClick="document.location.reload(true)">Start Quiz Again</button>
     </div>
 
     <div id="lower-lower" class="hide">
