@@ -1,4 +1,4 @@
-# Challenge, week 4: Coding Quiz
+# Bootcamp Module 4: Web APIs, Challenge: Coding Quiz
 
 ## This project required me to build a coding quiz from scratch. The criteria for the quiz are: a start button that starts a timer and presents the first question, that the next question appears when the current question is answered, that time is deducted from the timer for incorrect answers, that the game is over when all questions are answered or the timer is at zero, and that the player can save their intials and score. 
 
